@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Now - FIC MUN</title>
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    /* Reset Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #001;
+      color: white;
+      overflow-x: hidden;
+    }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+      animation: slideIn 1.2s ease-in-out;
+    }
+    header .menu {
+      display: flex;
+      gap: 20px;
+    }
+    header a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+    header a:hover {
+      color: teal;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    /* Main Section */
+    .main {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  text-align: center; /* Add this */
+}
+
+.form-container {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px teal;
+  width: 400px;
+  margin: 0 auto;
+  max-width: 90%; /* Added for responsiveness */
+}
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: teal;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container input,
+    .form-container button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #333;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    .form-container input {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .form-container input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .form-container input:hover,
+    .form-container input:focus {
+      border-color: teal;
+      box-shadow: 0 0 5px teal;
+    }
+
+    .form-container button {
+      background: teal;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background: #006666;
+    }
+
+    .form-container .file-input-label {
+      text-align: left;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+    }
+
+    .form-container input[type="file"] {
+      padding: 5px;
+      font-size: 14px;
+      border: none;
+    }
+  /* Loading Screen */
+  #loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    animation: fadeOut 1s ease 3s forwards;
+  }
+  #loading img {
+    width: 300px; /* Increased logo size */
+  }
+  #loading .progress-bar {
+    margin-top: 20px;
+    width: 30%; /* Reduced progress bar width */
+    height: 4px; /* Reduced progress bar height */
+    background: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+  }
+  #loading .progress-bar div {
+    height: 100%;
+    background: teal;
+    width: 0;
+    animation: progress 3s linear forwards; /* Changed to 3 seconds */
+  }
+  @keyframes progress {
+    to {
+      width: 100%;
+    }
+  }
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+        /* Registration Form */
+        .form-container {
+            background: rgba(0, 51, 51, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0px 10px 25px rgba(0, 204, 204, 0.5);
+            text-align: left;
+            transform: translateY(100px);
+            animation: slideUp 1.5s ease-out forwards; /* Smooth slide-up effect */
+        }
+
+        .form-container h3 {
+            text-align: center;
+            color: #00e6e6;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #00b3b3;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="file"],
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #00cccc;
+            background: rgba(0, 204, 204, 0.1);
+            color: white;
+            margin-top: 5px;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="file"]:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00e6e6;
+            background: rgba(0, 204, 204, 0.2);
+        }
+
+        /* Transaction Details */
+        .transaction-details {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 102, 102, 0.2);
+            border-radius: 10px;
+            color: #00e6e6;
+        }
+
+        .transaction-details p {
+            margin-bottom: 5px;
+            color: #00cccc;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(90deg, #004d4d, #00b3b3);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 6px 15px rgba(0, 102, 102, 0.4);
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #004040, #007777);
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(0, 102, 102, 0.6);
+        }
+/* Cursor Animation */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25px; /* Increased size */
+  height: 25px; /* Increased size */
+  border: 2px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgb(0, 128, 128);
+  box-shadow: 0 0 15px rgb(0, 128, 128);
+  mix-blend-mode: difference;
+  transition: transform 0.2s ease, background-color 0.3s, width 0.3s, height 0.3s;
+}
+
+/* When hovering over links */
+a:hover ~ #custom-cursor {
+  width: 35px; /* Slightly larger on hover */
+  height: 35px;
+  background-color: transparent;
+}
+/* Page Animations */
+a {
+      position: relative;
+      overflow: hidden;
+    }
+    a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: teal;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+  </style>
+ 
+
+
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>FIC MUN</h1>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#committees">Committees</a>
+      <a href="#gallery">Gallery</a>
+      <a href="register.html">Register Now</a>
+    </nav>
+  </header>
+
+  <!-- Loading Screen -->
+  <div id="loading">
+    <img src="logo.png" alt="FIC MUN Logo">
+    <div class="progress-bar">
+      <div></div>
+    </div>
+  </div>
+
+  <!-- Main Section -->
+  <div class="main">
+    <div class="form-container">
+      <h3>Register Now</h3>
+      <form id="registrationForm" onsubmit="handlePayment(event)">
+          <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+              <label for="father_name">Father's Name</label>
+              <input type="text" id="father_name" name="father_name" required>
+          </div>
+
+          <div class="form-group">
+              <label for="cnic">CNIC</label>
+              <input type="text" id="cnic" name="cnic" required pattern="[0-9]{13}" placeholder="13 digit CNIC number">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" required pattern="[0-9]{11}" placeholder="11-digit phone number">
+          </div>
+          
+
+          <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+              <label for="payment_method">Payment Method</label>
+              <select id="payment_method" name="payment_method" required onchange="showPaymentInstructions()">
+                  <option value="">Select Payment Method</option>
+                  <option value="easypaisa" style="color: #00cc66;">Easypaisa</option>
+                  <option value="jazzcash" style="color: #ff6600;">JazzCash</option>
+              </select>
+          </div>
+
+          <div class="transaction-details" id="transactionDetails">
+              <p><strong id="paymentNumber"></strong></p>
+              <p>Please send the payment to the above number and upload the transaction screenshot below.</p>
+              <label for="transaction_image">Upload Transaction Image</label>
+              <input type="file" id="transaction_image" name="transaction_image" accept="image/*" required>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Registration</button>
+      </form>
+  </div>
+</div>
+  <!-- Custom Cursor -->
+  <div id="custom-cursor"></div>
+  <script>
+
+       // Loading Screen
+  window.addEventListener("load", () => {
+    const loading = document.getElementById("loading");
+    const main = document.querySelector(".main");
+    setTimeout(() => {
+      loading.style.display = "none";
+      main.style.display = "block";
+    }, 4000); // 3 seconds for animation + 1 second for fade-out
+  });
+  function showPaymentInstructions() {
+            const paymentMethod = document.getElementById("payment_method").value;
+            const transactionDetails = document.getElementById("transactionDetails");
+            const paymentNumber = document.getElementById("paymentNumber");
+
+            if (paymentMethod === "easypaisa") {
+                paymentNumber.innerText = "Easypaisa Number: 03XX-XXXXXXX";
+                transactionDetails.style.display = "block";
+            } else if (paymentMethod === "jazzcash") {
+                paymentNumber.innerText = "JazzCash Number: 03XX-XXXXXXX";
+                transactionDetails.style.display = "block";
+            } else {
+                transactionDetails.style.display = "none";
+            }
+        }
+
+        function handlePayment(event) {
+            event.preventDefault();
+            alert("Your registration has been submitted successfully along with the transaction proof.");
+        }
+            // Custom Cursor Animation
+    const cursor = document.getElementById("custom-cursor");
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.transform = `translate(${e.clientX - 7.5}px, ${e.clientY - 7.5}px)`;
+    });
+    (function(){
+      emailjs.init({
+        publicKey: "dxFcGTxa0QPHSm4_Q",
+      });
+   })();
+
+   
+   const form = document.getElementById("registrationForm");
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const transactionImage = formData.get("transaction_image");
+
+        // Check if there's an image
+        if (transactionImage) {
+            // Resize and compress image
+            const reader = new FileReader();
+            reader.onloadend = async function () {
+                const img = new Image();
+                img.src = reader.result;
+                img.onload = function () {
+                    // Create a canvas to resize the image
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+                    const MAX_WIDTH = 500; // Max width (you can adjust as needed)
+                    const MAX_HEIGHT = 300; // Max height (you can adjust as needed)
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Resize image to fit within MAX_WIDTH and MAX_HEIGHT while maintaining aspect ratio
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    // Set canvas size to the new image size
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Compress the image and convert to base64
+                    const compressedImage = canvas.toDataURL("image/jpeg", 0.7); // Adjust quality as needed
+                    sendEmail(compressedImage);
+                };
+            };
+            reader.readAsDataURL(transactionImage);
+        } else {
+            alert("Please upload a transaction image.");
+        }
+    });
+
+    function sendEmail(compressedImage) {
+        const formData = new FormData(document.getElementById("registrationForm"));
+
+        const emailParams = {
+    name: formData.get("name"),
+    father_name: formData.get("father_name"),
+    cnic: formData.get("cnic"),
+    phone: formData.get("phone"),
+    email: formData.get("email"),
+    transaction_image: compressedImage,  // Make sure this matches the placeholder
+};
+
+        emailjs.send("service_o0uidux", "template_5umg4vf", emailParams)
+            .then(() => {
+                alert("Registration submitted successfully!");
+                form.reset();
+            })
+            .catch((error) => {
+                console.error("EmailJS Error:", error);
+                alert("Failed to submit registration. Please try again.");
+            });
+    }
+  </script>
+</body>
+</html>

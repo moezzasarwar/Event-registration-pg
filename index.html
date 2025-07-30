@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIC MUN</title>
+  <style>
+    /* Reset Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #001;
+      color: white;
+      overflow: hidden;
+    }
+
+  /* Loading Screen */
+  #loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    animation: fadeOut 1s ease 3s forwards;
+  }
+  #loading img {
+    width: 300px; /* Increased logo size */
+  }
+  #loading .progress-bar {
+    margin-top: 20px;
+    width: 30%; /* Reduced progress bar width */
+    height: 4px; /* Reduced progress bar height */
+    background: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+  }
+  #loading .progress-bar div {
+    height: 100%;
+    background: teal;
+    width: 0;
+    animation: progress 3s linear forwards; /* Changed to 3 seconds */
+  }
+  @keyframes progress {
+    to {
+      width: 100%;
+    }
+  }
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+    /* Main Content */
+    .main {
+      display: none;
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+      animation: slideIn 1.2s ease-in-out;
+    }
+    header .menu {
+      display: flex;
+      gap: 20px;
+    }
+    header a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+    header a:hover {
+      color: teal;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    /* Home Section */
+    #home {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('background-image.jpg') no-repeat center center/cover;
+      text-align: center;
+    }
+    #home div {
+      animation: zoomIn 1.5s ease;
+    }
+    #home h1 {
+      font-size: 50px;
+      color: #66ccff;
+    }
+    #home p {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+    #home strong {
+      color: #ffffff;
+    }
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+/* Cursor Animation */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25px; /* Increased size */
+  height: 25px; /* Increased size */
+  border: 2px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgb(0, 128, 128);
+  box-shadow: 0 0 15px rgb(0, 128, 128);
+  mix-blend-mode: difference;
+  transition: transform 0.2s ease, background-color 0.3s, width 0.3s, height 0.3s;
+}
+
+/* When hovering over links */
+a:hover ~ #custom-cursor {
+  width: 35px; /* Slightly larger on hover */
+  height: 35px;
+  background-color: transparent;
+}
+
+
+    /* Page Animations */
+    a {
+      position: relative;
+      overflow: hidden;
+    }
+    a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: teal;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+        /* Intro Animation */
+        #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeOutIntro 1s ease 3s forwards;
+    }
+    #intro h1 {
+      font-size: 3em;
+      color: teal;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: textFadeIn 2s ease forwards;
+    }
+
+    @keyframes textFadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      50% { opacity: 0.5; transform: translateY(0); }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeOutIntro {
+      100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    .info-button {
+            position: fixed;
+            bottom: 50%;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: teal;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .info-box {
+            position: fixed;
+            top: 50%;
+            right: -350px; /* Initially offscreen */
+            transform: translateY(-50%);
+            width: 300px;
+            background-color: #1e88e5;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            transition: right 0.4s ease;
+        }
+
+        .info-box.open {
+            right: 20px; /* Slides in */
+        }
+
+        .info-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .info-box-header .close-btn {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .info-box-content {
+            margin-top: 15px;
+        }
+
+        .info-box-content p {
+            margin: 5px 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: rgb(37, 85, 85);
+        }
+  </style>
+</head>
+<!-- Include FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<body>
+  <!-- Loading Screen -->
+  <div id="loading">
+    <img src="logo.png" alt="FIC MUN Logo">
+    <div class="progress-bar">
+      <div></div>
+    </div>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="main">
+  <!-- Header -->
+  <header>
+    <h1>FIC MUN</h1>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#committees">Committees</a>
+      <a href="#gallery">Gallery</a>
+      <a href="register.html">Register Now</a>
+    </nav>
+  </header>
+
+  <!-- Intro Animation -->
+  <div id="intro">
+    <h1>Introducing You To</h1>
+  </div>
+
+    <!-- Home Section -->
+    <section id="home">
+      <div>
+        <h1>Welcome to FIC MUN</h1>
+        <p>Join us in shaping tomorrow’s world through diplomatic dialogue and global cooperation.</p>
+        <p><strong>MARK THE DATES: 17-18-19 January, 2025</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div id="custom-cursor"></div>
+
+  <div class="info-button" id="infoButton">i</div>
+
+  <div class="info-box" id="infoBox">
+      <div class="info-box-header">
+          Furqan
+          <span class="close-btn" id="closeButton">&times;</span>
+      </div>
+      <div class="info-box-content">
+          <p><strong>Lead Developer</strong></p>
+           <p><strong>Web Designer</strong></p>
+          <p><strong>MERN Stack</strong></p>
+          <p><strong>UI/UX Designer</strong></p>
+      </div>
+      <div class="social-icons">
+          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+  </div>
+
+
+  <script>
+   // Loading Screen
+  window.addEventListener("load", () => {
+    const loading = document.getElementById("loading");
+    const main = document.querySelector(".main");
+    setTimeout(() => {
+      loading.style.display = "none";
+      main.style.display = "block";
+    }, 4000); // 3 seconds for animation + 1 second for fade-out
+  });
+
+    // Custom Cursor Animation
+    const cursor = document.getElementById("custom-cursor");
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.transform = `translate(${e.clientX - 7.5}px, ${e.clientY - 7.5}px)`;
+    });
+// Intro Animation Fade-Out
+window.addEventListener("load", () => {
+      const intro = document.getElementById("intro");
+      const loading = document.getElementById("loading-screen");
+
+      setTimeout(() => {
+        intro.style.display = "none";
+      }, 3000); // Matches fade-out timing of intro animation
+
+      setTimeout(() => {
+        loading.style.display = "none";
+      }, 7000); // Matches fade-out timing of loading animation
+    });
+    const infoButton = document.getElementById('infoButton');
+    const infoBox = document.getElementById('infoBox');
+    const closeButton = document.getElementById('closeButton');
+
+    // Open the box on hover over the button
+    infoButton.addEventListener('mouseover', () => {
+        infoBox.classList.add('open');
+    });
+
+    // Close the box when hovering anywhere else
+    document.addEventListener('mousemove', (e) => {
+        if (!infoBox.contains(e.target) && !infoButton.contains(e.target)) {
+            infoBox.classList.remove('open');
+        }
+    });
+
+    // Close button functionality
+    closeButton.addEventListener('click', () => {
+        infoBox.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
